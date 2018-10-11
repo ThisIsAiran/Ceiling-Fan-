@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fan</title>
+	<style>
+	  body{
+	  	display: flex;
+	  	flex-direction: column;
+	  	justify-content: center;
+	  	align-items: center;
+	  	background:#3B382C;
+	  	background-size: 100% 100%;
+	  }
+	  .fan{
+	  	position: relative;
+	  	width: 600px;
+	  	height: 600px;
+	  	background:url(oriental.png);
+	  	background-size: 600px 600px;
+	  }
+	  .fanpart{
+	  	position:absolute;
+	  	top:calc(50% - 25px);
+	  	left: calc(50% - 250px);
+	  	width: 250px;
+	  	height: 50px;
+	  	background: #3B382C;
+	  	transform-origin: right;
+	  	border-bottom:2px solid white;
+	  	border-top-left-radius: 10%;
+	  	border-bottom-left-radius: 10%;
+	  	display: flex;
+	  	flex-direction: row;
+	  	justify-content: center;
+	  	align-items: center;
+	  }
+	  .left{
+          transform: rotateZ(0deg);
+	  }
+	  .top{
+          transform: rotateZ(120deg);
+	  }
+	  .right{
+          transform: rotateZ(240deg);
+	  }
+      .circle{
+      	position: absolute;
+      	top:calc(50% - 50px);
+      	left: calc(50% - 50px);
+      	background:#3B382C;
+      	background-size: 200px 200px;
+      	width: 100px;
+      	height: 100px;
+      	border: 2px solid white;
+      	border-radius: 50%;
+      	box-shadow: 1px 1px 1px  grey;
+      	display: flex;
+      	flex-direction: row;
+      	justify-content: center;
+      	align-items: center;
+      }
+      .container{
+      		position: relative;
+	  	width: 600px;
+	  	height: 640px;
+	  	background: white;
+	  	display: flex;
+	  	flex-direction: column;
+	  	justify-content: center;
+	    margin-top: 10px;
+      }
+     .button{
+     	width: 100%;
+     	height: 37px;
+     	background: white;
+     	margin-top: 3px;
+     	display: flex;
+     	flex-direction: row;
+     }
+     .but{
+     	flex: 1;
+     	font-size: 25px;
+     	font-family: cursive;
+     	background:#3B382C;
+     	color: white;
+     	display: flex;
+     	flex-direction: column;
+     	justify-content: center;
+     	text-align: center;
+     	border: white 2px solid;
+        border-right: none;	
+     }
+    .but p:hover{
+         cursor: pointer;
+         text-shadow: 3px 3px 3px white;
+    }
+    .c2{
+    	width: 70%;
+    	height: 70%;
+    	background: url(tiny.png);
+    	border: 2px solid white;
+      	border-radius: 50%;
+      	display: flex;
+      	flex-direction: row;
+      	justify-content: center;
+      	
+    }
+    .fl{
+    	width: 75%;
+    	height: 75%;
+    	background:url(tiny.png);
+    	border-top-left-radius: 10%;
+	  	border-bottom-left-radius: 10%;
+    }
+    .triangle-up {
+    margin-top: 10px;
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 40px solid #3B382C;
+   }
+   .triangle-down {
+	 margin-top: 20px;
+	 position: absolute;
+	 width: 0;
+	 height: 0;
+	 border-left: 25px solid transparent;
+	 border-right: 25px solid transparent;
+	 border-top: 40px solid #3B382C;
+            }
+    .start{
+          border-right: white 2px solid;
+          }
+    
+	</style>
+</head>
+<body>
+     <div class="container">
+     <div class="fan">
+        <div class="fanpart left">
+        	<div class="fl"></div>
+        </div>
+     	<div class="fanpart top">
+     		<div class="fl"></div>
+     	</div>
+     	<div class="fanpart right">
+     		<div class="fl"></div>
+     	</div>
+     	<div class="circle">
+     	<div class="c2">
+     	<div class="triangle-up"></div>
+     	<div class="triangle-down"></div>
+     	</div>
+     	</div>
+     </div>
+     <div class="button">
+     	<div class="but increase">
+     	<p> High</p>
+     	</div>
+     	<div class="but decrease">
+     	<p>Low</p>
+     </div>
+     <div class="but start">
+     	<p>Start</p>
+     </div>
+     </div>
+     <script>
+        let i = 0,flag =0,speed = 2;
+        const left1 = document.querySelector('.left');
+        const top1 = document.querySelector('.top');
+        const right1 = document.querySelector('.right');
+        const circle = document.querySelector('.circle');
+        const start = document.querySelector('.start');
+        const increase = document.querySelector('.increase');
+        const decrease = document.querySelector('.decrease');
+        start.addEventListener('click',function (){
+        	console.log("hello");
+        	if(flag === 0)
+           {
+         	flag =1;
+         	speed = 2;
+        	this.innerHTML = "<p> Stop </p>";
+        	myvar = setInterval(function(){startfan(); i = i + speed;},80);
+           }
+         else
+          {
+         	flag = 0;
+         	this.innerHTML = "<p> Start</p>";
+            clearInterval(myvar);
+          }
+          console.log(flag);
+        })
+        increase.addEventListener('click',function () {
+            if(flag === 1&&speed<40)
+        	speed = speed + 2;
+            else if(flag == 1 &&speed>=40)
+            {
+            	console.log("Max Speed");
+            }
+            else
+            console.log("Please click on start");
+        })
+        decrease.addEventListener('click',function () {
+        	if(flag == 1 && speed >2)
+        	speed = speed - 2;
+            else if(flag == 1 &&speed<=2)
+            	console.log("Minimum Speed");
+            else
+              console.log("Please click on start");
+        })
+        function startfan() {
+        	console.log(i);
+        	left1.style.transform = "rotateZ(" + (i) + "deg)";
+        	top1.style.transform = "rotateZ(" + (i + 120) + "deg)";
+        	right1.style.transform = "rotateZ(" + (i + 240) + "deg)";
+            circle.style.transform = "rotateZ(" + (i) + "deg)";
+        }
+      </script>
+</body>
+</html>
